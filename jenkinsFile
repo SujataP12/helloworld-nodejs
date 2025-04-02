@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "your-dockerhub-username/docker-test"
+        //IMAGE_NAME = "your-dockerhub-username/docker-test"
         CONTAINER_NAME = "node-app"
         PORT = "4000"
     }
@@ -10,7 +10,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo-url.git'  // Replace with your repo
+                echo 'Cloning Repository...'
+               // git 'https://github.com/your-repo-url.git'  // Replace with your repo
             }
         }
 
