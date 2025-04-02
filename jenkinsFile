@@ -66,8 +66,8 @@ pipeline {
                 sleep 5
 
                 # Stop and remove the container
-                docker stop \$CONTAINER_ID
-                docker rm \$CONTAINER_ID
+                # docker stop \$CONTAINER_ID
+                # docker rm \$CONTAINER_ID
             """
                 }
             }
