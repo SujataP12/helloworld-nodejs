@@ -56,7 +56,7 @@ pipeline {
                 script {
                     sh """
                 # Run the container from the image
-                docker run -d -p 4000:4000 $DOCKER_IMAGE
+                docker run -d -p 4001:4000 $DOCKER_IMAGE
                 # Get the container ID
                 CONTAINER_ID=\$(docker ps -q -l)
                 # Check if the container is running
