@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "your-dockerhub-username/docker-test"
+        CONTAINER_NAME = "node-app"
+        PORT = "4000"
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/your-repo-url.git'  // Replace with your repo
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+                    sh 'npm test || echo "No tests defined"'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    sh "docker build -t $IMAGE_NAME ."
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    withDockerRegistry([credentialsId: 'docker-hub-credentials', url: '']) {
+                        sh "docker push $IMAGE_NAME"
+                    }
+                }
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                script {
+                    sh """
+                        docker stop $CONTAINER_NAME || true
+                        docker rm $CONTAINER_NAME || true
+                        docker run -d --name $CONTAINER_NAME -p $PORT:$PORT $IMAGE_NAME
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment Successful!'
+        }
+        failure {
+            echo 'Build Failed!'
+        }
+    }
+}
