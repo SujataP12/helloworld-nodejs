@@ -1,12 +1,3 @@
-// This file is used to define the package for the Node.js application.
-// It includes metadata such as name, version, description, main file, scripts, author, license, dependencies, and engines.
-// It also specifies the version of Node.js required to run the application.
-// The "scripts" section defines commands that can be run using npm, such as starting the server or running tests.
-// The "devDependencies" section includes development dependencies, such as nodemon, which is used for automatically restarting the server during development.
-// The "engines" section specifies the version of Node.js that the application is compatible with.
-// The "dependencies" section is empty in this case, as there are no runtime dependencies specified for the application.
-
-
 {
   "name": "docker-test",
   "version": "1.0.0",
@@ -26,4 +17,3 @@
     "node": ">=18"
   }
 }
-
